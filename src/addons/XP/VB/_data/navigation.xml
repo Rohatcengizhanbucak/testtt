@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation>
+  <navigation_entry navigation_id="XP_VB_verified" parent_navigation_id="members" display_order="65550" navigation_type_id="basic" enabled="1"><![CDATA[{"link":"{{ link('verified') }}","display_condition":"$xf.visitor.hasPermission('view', 'XP_VB_List')","extra_attributes":[]}]]></navigation_entry>
+  <navigation_entry navigation_id="xp_vbRequests" parent_navigation_id="members" display_order="400" navigation_type_id="basic" enabled="1"><![CDATA[{"link":"{{ link('vb\/requests') }}","display_condition":"$xf.visitor.hasVbRequestPermission('manageAnyRequest')","extra_attributes":[]}]]></navigation_entry>
+  <navigation_entry navigation_id="xp_vbYourRequests" parent_navigation_id="members" display_order="401" navigation_type_id="basic" enabled="1"><![CDATA[{"link":"{{ link('vb\/requests', $xf.visitor, {'creator_id': $xf.visitor.user_id}) }}","display_condition":"$xf.visitor.user_id && $xf.visitor.hasVbRequestPermission('viewOwnRequest') && !$xf.visitor.xp_vb_is_verified","extra_attributes":[]}]]></navigation_entry>
+</navigation>

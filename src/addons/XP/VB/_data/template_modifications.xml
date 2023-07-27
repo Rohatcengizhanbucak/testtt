@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template_modifications>
+  <modification type="public" template="PAGE_CONTAINER" modification_key="add_css_for_vb" description="add css for vb" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[</head>]]></find>
+    <replace><![CDATA[<xf:css src="xp_vb.less" />
+$0]]></replace>
+  </modification>
+  <modification type="public" template="account_visitor_menu" modification_key="xp_vb_link_in_visitor_menu" description="adding link to account visitor menu" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<!--[XF:menu_separator:below_account_links]-->]]></find>
+    <replace><![CDATA[<hr class="menu-separator" />
+
+	<ul class="listPlain listColumns listColumns--narrow listColumns--together">
+		<xf:if is="$xf.visitor.user_id != 0 && !$xf.visitor.xp_vb_is_verified">
+			<xf:if is="$user.xp_vb_verificationrequest_count|number < {{ $xf.visitor.hasPermission('xp_vb', 'maxRequestCount') }} || {{ $xf.visitor.hasPermission('xp_vb', 'maxRequestCount') }} == -1">
+				<li><a class="menu-linkRow" href="{{ link('members/request', $xf.visitor) }}" title="{{ phrase('xp_vb_requestyourbadge') }}" data-xf-init="tooltip" data-xf-click="overlay">
+					{{ phrase('xp_vb_requestyourbadge') }}
+				</a></li>
+			</xf:if>
+		</xf:if>
+		
+		<xf:if is="$xf.visitor.user_id && $xf.visitor.hasVbRequestPermission('viewOwnRequest') && !$xf.visitor.xp_vb_is_verified">
+			<li><a class="menu-linkRow" href="{{ link('vb/requests', $xf.visitor, {'creator_id': $xf.visitor.user_id}) }}" title="{{ phrase('nav.xp_vbYourRequests') }}" data-xf-init="tooltip" data-xf-click="overlay">
+				{{ phrase('nav.xp_vbYourRequests') }}
+			</a></li>
+		</xf:if>
+		
+		<xf:if is="$xf.visitor.hasVbRequestPermission('manageAnyRequest')">
+			<li><a class="menu-linkRow" href="{{ link('vb/requests') }}" title="{{ phrase('nav.xp_vbYourRequests') }}" data-xf-init="tooltip" data-xf-click="overlay">
+				{{ phrase('nav.xp_vbRequests') }}
+			</a></li>
+		</xf:if>
+	</ul>
+$0]]></replace>
+  </modification>
+  <modification type="public" template="account_wrapper" modification_key="xp_vb_links_in_account_wrapper" description="adding links to account details page" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<h3 class="block-minorHeader">{{ phrase('settings') }}</h3>]]></find>
+    <replace><![CDATA[<h3 class="block-minorHeader">{{ phrase('nav.xp_vbRequests') }}</h3>
+			<div class="block-body">
+				<xf:if is="$xf.visitor.user_id != 0 && !$xf.visitor.xp_vb_is_verified">
+					<xf:if is="$user.xp_vb_verificationrequest_count|number < {{ $xf.visitor.hasPermission('xp_vb', 'maxRequestCount') }} || {{ $xf.visitor.hasPermission('xp_vb', 'maxRequestCount') }} == -1">
+						<a class="blockLink" href="{{ link('members/request', $xf.visitor) }}" title="{{ phrase('xp_vb_requestyourbadge') }}" data-xf-init="tooltip" data-xf-click="overlay">
+							{{ phrase('xp_vb_requestyourbadge') }}
+						</a>
+					</xf:if>
+				</xf:if>
+				
+				<xf:if is="$xf.visitor.user_id && $xf.visitor.hasVbRequestPermission('viewOwnRequest') && !$xf.visitor.xp_vb_is_verified">
+					<a class="blockLink" href="{{ link('vb/requests', $xf.visitor, {'creator_id': $xf.visitor.user_id}) }}" title="{{ phrase('nav.xp_vbYourRequests') }}" data-xf-init="tooltip" data-xf-click="overlay">
+						{{ phrase('nav.xp_vbYourRequests') }}
+					</a>
+				</xf:if>
+				
+				<xf:if is="$xf.visitor.hasVbRequestPermission('manageAnyRequest')">
+					<a class="blockLink" href="{{ link('vb/requests') }}" title="{{ phrase('nav.xp_vbYourRequests') }}" data-xf-init="tooltip" data-xf-click="overlay">
+						{{ phrase('nav.xp_vbRequests') }}
+					</a>
+				</xf:if>
+			</div>
+$0]]></replace>
+  </modification>
+  <modification type="admin" template="helper_criteria" modification_key="xp_vb_helper_criteria_user" description="Add the Verification Badge user criteria." execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<!--[XF:user:content_after_messages]-->]]></find>
+    <replace><![CDATA[$0
+<xf:option name="user_criteria[xp_vb_verificationrequest_count][rule]" value="xp_vb_verificationrequest_count" selected="{$criteria.xp_vb_verificationrequest_count}"
+	label="{{ phrase('xp_vb_user_has_requested_vb_at_least_x_times:') }}">
+	<xf:numberbox name="user_criteria[xp_vb_verificationrequest_count][data][vb_request]" value="{$criteria.xp_vb_verificationrequest_count.vb_request}"
+		size="5" min="0" step="1" />
+</xf:option>
+
+<xf:option name="user_criteria[xp_vb_verificationrequest_count_nmt][rule]" value="xp_vb_verificationrequest_count_nmt" selected="{$criteria.xp_vb_verificationrequest_count_nmt}"
+	label="{{ phrase('xp_vb_user_has_requested_vb_no_more_than_x_times:') }}">
+	<xf:numberbox name="user_criteria[xp_vb_verificationrequest_count_nmt][data][vb_request]" value="{$criteria.xp_vb_verificationrequest_count_nmt.vb_request}"
+		size="5" min="0" step="1" />
+</xf:option>
+]]></replace>
+  </modification>
+  <modification type="public" template="member_view" modification_key="add_request_vb_to_profile" description="add request vb to profile" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:username user="{$user}" rich="true" href="" />]]></find>
+    <replace><![CDATA[$0 
+<xf:if is="$user.user_id == $xf.visitor.user_id && !$xf.visitor.xp_vb_is_verified">
+	<xf:if is="$user.xp_vb_verificationrequest_count|number < {{ $xf.visitor.hasPermission('xp_vb', 'maxRequestCount') }} || {{ $xf.visitor.hasPermission('xp_vb', 'maxRequestCount') }} == -1">
+	<a href="{{ link('members/request', $user) }}" title="{{ phrase('xp_vb_requestyourbadge') }}" data-xf-init="tooltip" data-xf-click="overlay"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+	</xf:if>
+</xf:if>]]></replace>
+  </modification>
+  <modification type="admin" template="user_edit" modification_key="add_is_verified" description="Add Is Verified" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[					<xf:checkboxrow>
+						<xf:option name="user[is_staff]" selected="$user.is_staff"
+							label="{{ phrase('display_user_as_staff') }}"
+							hint="{{ phrase('if_selected_this_user_will_be_listed_publicly_as_staff_member') }}" />
+					</xf:checkboxrow>]]></find>
+    <replace><![CDATA[$0
+					<xf:checkboxrow>
+						<xf:option name="xp_vb_is_verified" selected="$user.xp_vb_is_verified"
+							label="{{ phrase('xp_vb_display_user_as_staff') }}"
+							hint="{{ phrase('xp_vb_if_selected_this_user_will_be_listed_publicly_as_verified_member') }}" />
+					</xf:checkboxrow>]]></replace>
+  </modification>
+</template_modifications>

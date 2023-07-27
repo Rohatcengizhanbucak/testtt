@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style_properties>
+  <style_property property_name="xp_vb_badge" group_name="xp_vb" title="Badge" description="Style of the badge" property_type="css" display_order="1" css_components="text">
+    <value>{
+    "color": "#3ba1fc",
+    "font-weight": "550",
+    "font-size": "14px"
+}</value>
+  </style_property>
+</style_properties>

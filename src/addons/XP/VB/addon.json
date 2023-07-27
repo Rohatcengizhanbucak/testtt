@@ -1,0 +1,19 @@
+{
+    "legacy_addon_id": "",
+    "title": "[OzzModz] Verification Badge",
+    "description": "Ability to mark any user as verified and show a badge next to their username",
+    "version_id": 2020170,
+    "version_string": "2.2.1",
+    "dev": "Ozzy47",
+    "dev_url": "https://snogssite.com/",
+    "faq_url": "",
+    "support_url": "https://snogssite.com/threads/ozzmodz-verification-badge-paid.3642/",
+    "extra_urls": [],
+    "require": {
+        "XF": [
+            2010031,
+            "XenForo 2.1.0 Beta 1+"
+        ]
+    },
+    "icon": ""
+}

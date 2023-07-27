@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+  <template type="public" title="alert_user_vb_request_approve" version_id="2000070" version_string="2.0.0"><![CDATA[{{ phrase('xp_vb_your_request_to_get_vb_has_been_approved', {
+	'userLink': '<a href="' . base_url($extra.userLink) . '" class="fauxBlockLink-blockLink">' . $extra.username . '</a>'
+}) }}
+<xf:if is="$extra.reason">{{ phrase('reason:') }} {$extra.reason}</xf:if>]]></template>
+  <template type="public" title="alert_user_vb_request_close" version_id="2000070" version_string="2.0.0"><![CDATA[{{ phrase('xp_vb_your_request_to_get_vb_has_been_closed', {
+	'userLink': '<a href="' . base_url($extra.userLink) . '" class="fauxBlockLink-blockLink">' . $extra.username . '</a>'
+}) }}
+<xf:if is="$extra.reason">{{ phrase('reason:') }} {$extra.reason}</xf:if>]]></template>
+  <template type="public" title="alert_user_vb_request_reject" version_id="2000070" version_string="2.0.0"><![CDATA[{{ phrase('xp_vb_your_request_to_get_vb_has_been_rejected', {
+	'userLink': '<a href="' . base_url($extra.userLink) . '" class="fauxBlockLink-blockLink">' . $extra.username . '</a>'
+}) }}
+<xf:if is="$extra.reason">{{ phrase('reason:') }} {$extra.reason}</xf:if>]]></template>
+  <template type="public" title="xp_vb.less" version_id="2000070" version_string="2.0.0"><![CDATA[.xpvb{
+	.xf-xp_vb_badge();
+}
+
+.structItem-cell.structItem-cell--icon.structItem-cell--iconExpanded.structItem-cell--userVbAvatarImage
+{
+    width: 110px;
+}
+
+.structItem-cell--userVbAvatarImage .structItem-iconContainer .avatar
+{
+	width: 96px !important;
+	height: 96px !important;
+	font-size: 57.6px;
+}
+
+@media (max-width: 374px) 
+{
+	.structItem-cell.structItem-cell--icon.structItem-cell--iconExpanded.structItem-cell--userVbAvatarImage
+	{
+		width: 65px;
+	}
+
+	.structItem-cell--userVbAvatarImage .structItem-iconContainer .avatar
+	{
+		width: 48px;
+		height: 48px;
+		font-size: 28.8px;
+	}
+}
+
+
+// #################################### LIST VIEW LAYOUT SPECIFIC CSS ########################
+
+.structItem-cell.structItem-cell--listViewLayout
+{
+	display: block;
+	padding-bottom: .2em;
+}
+
+.structItem-cell.structItem-cell--listViewLayout .structItem-minor 
+{
+	float: none !important;
+}
+
+.structItem-itemCategoryTitleHeader
+{
+	font-size: @xf-fontSizeSmaller;
+	font-style: italic;
+	color: @xf-textColorMuted;
+}
+
+.structItem-LatestItemTitleFooter
+{
+	padding-top: 5px;
+	font-size: @xf-fontSizeSmaller;
+	font-style: italic;
+	color: @xf-textColorMuted;
+}
+
+.structItem-itemTagLine
+{
+	font-size: @xf-fontSizeSmaller;
+	margin-top: @xf-paddingSmall;
+	margin-bottom: @xf-paddingSmall;
+}
+
+.structItem-listViewMeta
+{
+	padding-top: 0;
+	color: @xf-textColorMuted;
+
+	.pairs
+	{
+		display: inline;
+
+		&:before,
+		&:after
+		{
+			display: none;
+		}
+
+		> dt,
+		> dd
+		{
+			display: inline;
+			float: none;
+			margin: 0;
+		}
+	}
+
+	.structItem-metaItem
+	{
+		display: inline;
+	}
+
+	.ratingStarsRow
+	{
+		display: inline;
+
+		.ratingStarsRow-text
+		{
+			display: none;
+		}
+	}
+
+	.structItem-metaItem--author > dt,
+	.structItem-metaItem--publishdate > dt,
+	.structItem-metaItem--createdate > dt
+	{
+		display: none;
+	}
+
+	.structItem-metaItem + .structItem-metaItem:before
+	{
+		display: inline;
+		content: "\20\00B7\20";
+		color: @xf-textColorMuted;
+	}
+}
+
+
+// #################################### REQUEST BODY / VIEW SPECIFIC CSS ########################
+
+.requestStatus
+{
+	font-weight: @xf-fontWeightNormal;
+}
+
+.requestStatus.approved
+{
+	color: green;
+}
+
+.requestStatus.rejected
+{
+	color: red;
+}
+
+.requestStatus.pending
+{
+	color: @xf-textColorMuted;	
+	font-style: italic;
+}
+
+.requestStatus.closed
+{
+	color: @xf-textColorMuted;	
+	font-style: italic;
+}
+
+.requestBody
+{
+	display: flex;
+}
+
+.requestBody-main
+{
+	flex: 1;
+	min-width: 0;
+	padding: @xf-blockPaddingV @xf-blockPaddingH;
+}
+
+.requestBody-attachments
+{
+	margin: .5em 0;
+}
+
+.requestBody .actionBar-set
+{
+	margin-top: @xf-messagePadding;
+	font-size: @xf-fontSizeSmall;
+}
+
+@media (max-width: @xf-responsiveWide)
+{
+	.requestBody
+	{
+		display: block;
+	}
+}]]></template>
+  <template type="public" title="xp_vb_list" version_id="2010570" version_string="2.1.5"><![CDATA[<xf:title>{{ phrase('XP_VB_verified_members') }}</xf:title>
+
+<div class="block-rowMessage block-rowMessage--warning block-rowMessage--iconic">
+	{{ phrase('XP_VB_verified_explain') }}
+</div>
+
+<div class="block">
+	<div class="block-outer">
+		<xf:trim>
+			<xf:pagenav page="{$page}" perpage="{$perPage}" total="{$total}"
+			link="verified" data="{$verified}"
+			wrapperclass="block-outer-main" />
+		</xf:trim>
+	</div>
+	
+	<div class="block-container">
+		<div class="block-body">
+			<xf:foreach loop="$verified" value="$verifiedmembers">
+				<div class="block-row block-row--separated">
+					<xf:macro template="member_list_macros" name="item" arg-user="{$verifiedmembers}" />
+				</div>
+			</xf:foreach>
+		</div>
+	</div>
+	
+	<div class="block-outer block-outer--after">
+		<xf:pagenav
+			page="{$page}" perpage="{$perPage}" total="{$total}"
+			link="verified" data="{$verified}"
+			wrapperclass="block-outer-main" />
+		<xf:showignored wrapperclass="block-outer-opposite" />
+	</div>
+</div>]]></template>
+  <template type="public" title="xp_vb_request_approve" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('xp_vb_approve_request_by_x', {'name': $request.User.username}) }}</xf:title>
+
+<xf:breadcrumb href="{{ link('vb/requests') }}">{{ phrase('xp_vb_requests') }}</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('vb/requests', $request) }}">{{ phrase('xp_vb_request_for_x', {'name': $user.username}) }}</xf:breadcrumb>
+
+<xf:form action="{{ link('vb/requests/approve', $request) }}" class="block" ajax="true" data-force-flash-message="on">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:editorrow name="status_message" value="{$request.status_message}" data-min-height="150"
+				label="{{ phrase('xp_vb_request_status_information') }}"
+				explain="{{ phrase('xp_vb_request_status_information_approve_explain') }}" />
+
+			<xf:checkboxrow label="">
+				<xf:option name="confirm" required="required">{{ phrase('xp_vb_confrim_approve_request') }}</xf:option>
+			</xf:checkboxrow>
+		</div>
+
+		<xf:submitrow icon="confirm" submit="{{ phrase('xp_vb_approve_request') }}" sticky="true" />
+	</div>
+</xf:form>]]></template>
+  <template type="public" title="xp_vb_request_close" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('xp_vb_close_request_by_x', {'name': $request.User.username}) }}</xf:title>
+
+<xf:breadcrumb href="{{ link('vb/requests') }}">{{ phrase('xp_vb_requests') }}</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('vb/requests', $request) }}">{{ phrase('xp_vb_request_for_x', {'name': $user.username}) }}</xf:breadcrumb>
+
+<xf:form action="{{ link('vb/requests/close', $request) }}" class="block" ajax="true">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:editorrow name="status_message" value="{$request.status_message}" data-min-height="150"
+				label="{{ phrase('xp_vb_request_status_information') }}"
+				explain="{{ phrase('xp_vb_request_status_information_close_explain') }}" />
+		</div>
+
+		<xf:macro template="helper_action" name="author_alert" arg-selected="{{ true }}" />
+		
+		<xf:submitrow icon="delete" submit="{{ phrase('xp_vb_close_request') }}" sticky="true" />
+	</div>
+</xf:form>]]></template>
+  <template type="public" title="xp_vb_request_edit" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('xp_vb_edit_request_by_x', {'name': $request.User.username}) }}</xf:title>
+
+<xf:breadcrumb href="{{ link('vb/requests') }}">{{ phrase('xp_vb_requests') }}</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('vb/requests', $request) }}">{{ phrase('xp_vb_request_for_x', {'name': $user.username}) }}</xf:breadcrumb>
+
+<xf:form action="{{ link('vb/requests/edit', $request) }}" class="block" ajax="true"
+	data-preview-url="{{ link('vb/requests/preview', $request) }}">
+
+	<div class="block-container">
+		<div class="block-body">
+			<div data-xf-init="attachment-manager">
+				<xf:editorrow name="message" value="{$request.message}" data-min-height="150"
+					attachments="{$attachmentData.attachments}"
+					label="{{ phrase('xp_vb_request_information') }}"
+					hint=""
+					explain="{{ phrase('xp_vb_request_information_explain') }}" />
+
+				<xf:formrow>
+					<xf:if is="$attachmentData">
+						<xf:macro template="helper_attach_upload" name="upload_block" arg-attachmentData="{$attachmentData}" />
+					</xf:if>
+				
+				</xf:formrow>
+			</div>
+
+			<xf:if is="$request.canManage()">
+				<xf:editorrow name="status_message" value="{$request.status_message}" data-min-height="100"
+					data-allow-empty="true"
+					label="{{ phrase('xp_vb_request_status_information') }}"
+					explain="{{ phrase('xp_vb_request_status_information_explain') }}" />
+			</xf:if>
+		</div>
+
+		<xf:submitrow icon="save" sticky="true">
+			
+		</xf:submitrow>
+	</div>
+</xf:form>]]></template>
+  <template type="public" title="xp_vb_request_index" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:title page="{$page}">{{ phrase('xp_vb_requests') }}</xf:title>
+
+<xf:css src="xp_vb.less" />
+
+<xf:macro template="metadata_macros" name="canonical_url"
+	arg-canonicalUrl="{{ link('canonical:vb/requests', null, {'page': $page}) }}" />
+
+<div class="block">
+	<div class="block-outer"><xf:trim>
+
+		<xf:pagenav page="{$page}" perpage="{$perPage}" total="{$total}"
+			link="vb/requests" params="{$filters}"
+			wrapperclass="block-outer-main" />
+
+		<xf:if contentcheck="true">
+			<div class="block-outer-opposite">
+				<div class="buttonGroup">
+				<xf:contentcheck>
+
+				</xf:contentcheck>
+				</div>
+			</div>
+		</xf:if>
+
+	</xf:trim></div>
+
+	<div class="block-container">
+		<xf:macro template="xp_vb_request_index_macros" name="list_filter_bar"
+			arg-filters="{$filters}"
+			arg-baseLinkPath="vb/requests"
+			arg-creatorFilter="{$creatorFilter}" />
+
+		<div class="block-body">
+			<xf:if is="$requests is not empty">
+				<div class="structItemContainer">
+					<xf:foreach loop="$requests" value="$request">
+						<xf:macro template="xp_vb_user_list_macros" name="request_user"
+							arg-request="{$request}" 
+							arg-user="{$request.User}" />
+					</xf:foreach>
+				</div>
+			<xf:elseif is="$filters" />
+				<div class="block-row">{{ phrase('xp_vb_there_no_requests_matching_your_filters') }}</div>
+			<xf:else />
+				<div class="block-row">{{ phrase('xp_vb_no_requests_have_been_submitted_yet') }}</div>
+			</xf:if>
+		</div>
+	</div>
+
+	<div class="block-outer block-outer--after">
+		<xf:pagenav
+			page="{$page}" perpage="{$perPage}" total="{$total}"
+			link="vb/requests" params="{$filters}"
+			wrapperclass="block-outer-main" />
+		<xf:showignored wrapperclass="block-outer-opposite" />
+	</div>
+</div>]]></template>
+  <template type="public" title="xp_vb_request_index_macros" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:macro name="list_filter_bar" arg-filters="!" arg-baseLinkPath="!" arg-creatorFilter="{{ null }}" arg-linkData="{{ null }}">
+	<xf:set var="$sortOrders" value="{{ {
+		'request_date': phrase('xp_vb_request_date')
+	} }}" />
+
+	<div class="block-filterBar">
+		<div class="filterBar">
+			<xf:if contentcheck="true">
+				<ul class="filterBar-filters">
+					<xf:contentcheck>
+						<xf:if is="$filters.request_status">
+							<li><a href="{{ link($baseLinkPath, $linkData, $filters|replace('request_status', null)) }}"
+								class="filterBar-filterToggle" data-xf-init="tooltip" title="{{ phrase('remove_this_filter')|for_attr }}">
+								<span class="filterBar-filterToggle-label">{{ phrase('xp_vb_request_status:') }}</span>
+								<xf:if is="$filters.request_status == 'pending'">
+									{{ phrase('xp_vb_pending') }}
+								<xf:elseif is="$filters.request_status == 'approved'" />
+									{{ phrase('xp_vb_approved') }}
+								<xf:elseif is="$filters.request_status == 'rejected'" />
+									{{ phrase('xp_vb_rejected') }}
+								<xf:elseif is="$filters.request_status == 'closed'" />
+									{{ phrase('xp_vb_closed') }}
+								</xf:if>
+							</a></li>
+						</xf:if>
+						<xf:if is="$filters.creator_id AND $creatorFilter">
+							<li><a href="{{ link($baseLinkPath, $linkData, $filters|replace('creator_id', null)) }}"
+								class="filterBar-filterToggle" data-xf-init="tooltip" title="{{ phrase('remove_this_filter')|for_attr }}">
+								<span class="filterBar-filterToggle-label">{{ phrase('created_by:') }}</span>
+								{$creatorFilter.username}</a></li>
+						</xf:if>
+						<xf:if is="$filters.order AND {$sortOrders.{$filters.order}}">
+							<li><a href="{{ link($baseLinkPath, $linkData, $filters|replace({'order': null, 'direction': null})) }}"
+								class="filterBar-filterToggle" data-xf-init="tooltip" title="{{ phrase('return_to_default_order')|for_attr }}">
+								<span class="filterBar-filterToggle-label">{{ phrase('sort_by:') }}</span>
+								{$sortOrders.{$filters.order}}
+								<xf:fa icon="{{ $filters.direction == 'asc' ? 'fa-angle-up' : 'fa-angle-down' }}" />
+								<span class="u-srOnly"><xf:if is="$filters.direction == 'asc'">{{ phrase('ascending') }}<xf:else />{{ phrase('descending') }}</xf:if></span>
+							</a></li>
+						</xf:if>
+					</xf:contentcheck>
+				</ul>
+			</xf:if>
+
+			<a class="filterBar-menuTrigger" data-xf-click="menu" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true">{{ phrase('filters') }}</a>
+			<div class="menu menu--wide" data-menu="menu" aria-hidden="true"
+				data-href="{{ link($baseLinkPath . '/filters', $linkData, $filters) }}"
+				data-load-target=".js-filterMenuBody">
+				<div class="menu-content">
+					<h4 class="menu-header">{{ phrase('show_only:') }}</h4>
+					<div class="js-filterMenuBody">
+						<div class="menu-row">{{ phrase('loading...') }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</xf:macro>]]></template>
+  <template type="public" title="xp_vb_request_list_filters" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:form action="{{ link('vb/requests/filters') }}">
+
+	<!--[XF:above_status]-->
+	<div class="menu-row menu-row--separated">
+		{{ phrase('xp_vb_request_status:') }}
+		<div class="u-inputSpacer">
+			<xf:select name="request_status" value="{$filters.request_status}">
+				<xf:option value="">{{ phrase('any') }}</xf:option>
+				<xf:option value="pending">{{ phrase('xp_vb_pending') }}</xf:option>
+				<xf:option value="approved">{{ phrase('xp_vb_approved') }}</xf:option>
+				<xf:option value="rejected">{{ phrase('xp_vb_rejected') }}</xf:option>
+				<xf:option value="closed">{{ phrase('xp_vb_closed') }}</xf:option>
+			</xf:select>
+		</div>
+	</div>
+
+	<!--[XF:above_created_by]-->
+	<div class="menu-row menu-row--separated">
+		{{ phrase('xp_vb_request_submitted_by:') }}
+		<div class="u-inputSpacer">
+			<xf:textbox name="creator" value="{{ $creatorFilter ? $creatorFilter.username : '' }}" ac="single" />
+		</div>
+	</div>
+
+	<!--[XF:above_sort_by]-->
+	<div class="menu-row menu-row--separated">
+		{{ phrase('sort_by:') }}
+		<div class="inputGroup u-inputSpacer">
+			<xf:select name="order" value="{{ $filters.order ?: 'request_date' }}">
+				<xf:option value="request_date">{{ phrase('xp_vb_request_date') }}</xf:option>
+			</xf:select>
+			<span class="inputGroup-splitter"></span>
+			<xf:select name="direction" value="{{ $filters.direction ?: 'desc' }}">
+				<xf:option value="desc">{{ phrase('descending') }}</xf:option>
+				<xf:option value="asc">{{ phrase('ascending') }}</xf:option>
+			</xf:select>
+		</div>
+	</div>
+
+	<div class="menu-footer">
+		<span class="menu-footer-controls">
+			<xf:button type="submit" class="button--primary">{{ phrase('filter') }}</xf:button>
+		</span>
+	</div>
+	<xf:hiddenval name="apply">1</xf:hiddenval>
+</xf:form>]]></template>
+  <template type="public" title="xp_vb_request_reject" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('xp_vb_reject_request_by_x', {'name': $request.User.username}) }}</xf:title>
+
+<xf:breadcrumb href="{{ link('vb/requests') }}">{{ phrase('xp_vb_requests') }}</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('vb/requests', $request) }}">{{ phrase('xp_vb_request_for_x', {'name': $user.username}) }}</xf:breadcrumb>
+
+<xf:form action="{{ link('vb/requests/reject', $request) }}" class="block" ajax="true">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:editorrow name="status_message" value="{$request.status_message}" data-min-height="150"
+				label="{{ phrase('xp_vb_request_status_information') }}"
+				explain="{{ phrase('xp_vb_request_status_information_reject_explain') }}" />
+		</div>
+
+		<xf:macro template="helper_action" name="author_alert" arg-selected="{{ true }}" />
+		
+		<xf:submitrow icon="delete" submit="{{ phrase('xp_vb_reject_request') }}" sticky="true" />
+	</div>
+</xf:form>]]></template>
+  <template type="public" title="xp_vb_request_view" version_id="2010370" version_string="2.1.3"><![CDATA[<xf:title>{{ phrase('xp_vb_request_for_x', {'name': $user.username}) }}</xf:title>
+
+<xf:css src="xp_vb.less" />
+
+<xf:breadcrumb href="{{ link('vb/requests') }}">{{ phrase('xp_vb_requests') }}</xf:breadcrumb>
+
+<xf:pageaction>
+	<xf:if is="$request.canApprove()">
+		<xf:button href="{{ link('vb/requests/approve', $request) }}" class="button--cta" icon="approve" data-xf-click="overlay">{{ phrase('xp_vb_approve_request') }}</xf:button>
+	</xf:if>
+	<xf:if is="$request.canReject()">
+		<xf:button href="{{ link('vb/requests/reject', $request) }}" class="button--cta" icon="delete" data-xf-click="overlay">{{ phrase('xp_vb_reject_request') }}</xf:button>
+	</xf:if>
+	<xf:if is="$request.canClose()">
+		<xf:button href="{{ link('vb/requests/close', $request) }}" class="button--cta" icon="delete" data-xf-click="overlay">{{ phrase('xp_vb_close_request') }}</xf:button>
+	</xf:if>
+</xf:pageaction>
+
+<xf:macro template="lightbox_macros" name="setup" arg-canViewAttachments="{{ $request.canViewRequestAttachments() }}" />
+
+<div class="blockMessage">
+	<div class="pairJustifier">
+		<dl class="pairs pairs--rows pairs--rows--centered">
+			<dt>{{ phrase('xp_vb_request_submitted_by') }}</dt>
+			<dd>
+				<xf:username user="{$request.User}" defaultname="{$request.username}" />
+			</dd>
+		</dl>
+		<dl class="pairs pairs--rows pairs--rows--centered">
+			<dt>{{ phrase('xp_vb_request_date') }}</dt>
+			<dd>
+				<xf:date time="{$request.request_date}" />
+			</dd>
+		</dl>
+		<dl class="pairs pairs--rows pairs--rows--centered">
+			<dt>{{ phrase('xp_vb_request_status') }}</dt>
+			<dd>
+				<xf:if is="$request.request_status =='approved'">
+					<span class="label label--green">{{ phrase('xp_vb_approved') }}</span>
+				<xf:elseif is="$request.request_status =='rejected'" />
+					<span class="label label--red">{{ phrase('xp_vb_rejected') }}</span>
+				<xf:elseif is="$request.request_status =='closed'" />
+					<span class="label label--gray">{{ phrase('xp_vb_closed') }}</span>
+				<xf:else />
+					<span class="label label--gray">{{ phrase('pending') }}</span>
+				</xf:if>
+			</dd>
+		</dl>
+		<xf:if is="$request.request_status =='approved'">
+			<dl class="pairs pairs--rows pairs--rows--centered">
+				<dt>{{ phrase('xp_vb_date_approved') }}</dt>
+				<dd>
+					<xf:date time="{$request.approve_date}" />
+				</dd>
+			</dl>
+		</xf:if>
+		<xf:if is="$request.request_status =='rejected'">
+			<dl class="pairs pairs--rows pairs--rows--centered">
+				<dt>{{ phrase('xp_vb_date_rejected') }}</dt>
+				<dd>
+					<xf:date time="{$request.reject_date}" />
+				</dd>
+			</dl>
+		</xf:if>
+		<xf:if is="$request.request_status =='closed'">
+			<dl class="pairs pairs--rows pairs--rows--centered">
+				<dt>{{ phrase('xp_vb_date_closed') }}</dt>
+				<dd>
+					<xf:date time="{$request.close_date}" />
+				</dd>
+			</dl>
+		</xf:if>
+	</div>
+</div>
+
+<div class="block">
+	<div class="block-container">
+		<h3 class="block-header">{{ phrase('xp_vb_request_information') }}</h3>
+		<div class="block-body lbContainer js-requestBody"
+			data-xf-init="lightbox"
+			data-lb-id="request-{$request.request_id}"
+			data-lb-caption-desc="{{ $request.User ? $request.User.username : $request.username }} &middot; {{ date_time($request.request_date) }}">
+
+			
+	
+			<div class="requestBody">
+				<article class="requestBody-main js-lbContainer">
+					{{ bb_code($request.message, 'vb_request', $request) }}
+
+					<xf:if contentcheck="true">
+						<xf:css src="attachments.less" />
+						<h4 class="block-textHeader">{{ phrase('attachments') }}</h4>
+						<ul class="attachmentList requestBody-attachments">
+							<xf:contentcheck>
+								<xf:foreach loop="$request.Attachments" value="$attachment" if="!$request.isAttachmentEmbedded($attachment)">
+									<xf:macro template="attachment_macros" name="attachment_list_item"
+										arg-attachment="{$attachment}"
+										arg-canView="{{ $request.canViewRequestAttachments() }}" />
+								</xf:foreach>
+							</xf:contentcheck>
+						</ul>
+					</xf:if>
+
+					<xf:if contentcheck="true">
+						<div class="actionBar">
+							<xf:contentcheck>
+								<xf:if contentcheck="true">
+									<div class="actionBar-set actionBar-set--internal">
+									<xf:contentcheck>
+										<xf:if is="$request.canEdit()">
+											<a href="{{ link('vb/requests/edit', $request) }}"
+												class="actionBar-action actionBar-action--edit">{{ phrase('edit') }}</a>
+										</xf:if>
+										<xf:if is="$request.canApprove()">
+											<a href="{{ link('vb/requests/approve', $request) }}"
+												class="actionBar-action actionBar-action--approve">{{ phrase('approve') }}</a>
+										</xf:if>
+										<xf:if is="$request.canReject()">
+											<a href="{{ link('vb/requests/reject', $request) }}"
+												class="actionBar-action actionBar-action--reject">{{ phrase('reject') }}</a>
+										</xf:if>
+										<xf:if is="$request.canClose()">
+											<a href="{{ link('vb/requests/close', $request) }}"
+												class="actionBar-action actionBar-action--close">{{ phrase('close') }}</a>
+										</xf:if>
+										<xf:if is="$xf.visitor.canViewIps() && $request.ip_id">
+											<a href="{{ link('vb/requests/ip', $request) }}"
+												class="actionBar-action actionBar-action--ip"
+												data-xf-click="overlay">{{ phrase('ip') }}</a>
+										</xf:if>
+									</xf:contentcheck>
+									</div>
+								</xf:if>
+							</xf:contentcheck>
+						</div>
+					</xf:if>
+
+					<div class="js-historyTarget toggleTarget" data-href="trigger-href"></div>
+				</article>
+			</div>
+		</div>
+	</div>
+</div>
+
+<xf:sidebar key="infoSidebar">
+	<div class="block">
+		<div class="block-container">
+			<h3 class="block-header">{{  phrase('user_info') }}</h3>
+			<div class="block-body block-row block-row--minor">
+				<div>
+					<dl class="pairs pairs--justified">
+						<dt>{{ phrase('xp_vb_user') }}</dt>
+						<dd><xf:username user="{$request.User}" defaultname="{$user.username}" /></dd>
+					</dl>
+				</div>
+				<div>
+					<dl class="pairs pairs--justified">
+						<dt>{{ phrase('xp_vb_requestscount') }}</dt>
+						<dd><a data-xf-init="tooltip" data-original-title="{{ phrase('xp_vb_view_x_requests', {'name': $user.username}) }}" href="{{ link('vb/requests/?creator_id=') }}{$request.User.user_id}" aria-hidden="true" data-xf-click="overlay">{$user.xp_vb_verificationrequest_count|number}</a></dd>
+					</dl>
+				</div>
+				<div>
+					<dl class="pairs pairs--justified">
+						<dt>{{ phrase('joined') }}</dt>
+						<dd>{{ date($user.register_date) }}</dd>
+					</dl>
+				</div>
+				<div>
+					<dl class="pairs pairs--justified">
+						<dt>{{ phrase('messages') }}</dt>
+						<dd>{$user.message_count|number}</dd>
+					</dl>
+				</div>
+				<div>
+					<dl class="pairs pairs--justified">
+						<dt>{{ phrase('reaction_score') }}</dt>
+						<dd>{$user.reaction_score|number}</dd>
+					</dl>
+				</div>
+				<xf:if is="$xf.options.enableTrophies">
+						<dl class="pairs pairs--justified">
+							<dt>{{ phrase('points') }}</dt>
+							<dd>{$user.trophy_points|number}</dd>
+						</dl>
+				</xf:if>
+				<xf:if is="$user.Profile.age">
+						<dl class="pairs pairs--justified">
+							<dt>{{ phrase('age') }}</dt>
+							<dd>{$user.Profile.age}</dd>
+						</dl>
+				</xf:if>
+				<xf:if is="$user.Profile.location">
+						<dl class="pairs pairs--justified">
+							<dt>{{ phrase('location') }}</dt>
+							<dd>
+								<xf:if is="$xf.options.geoLocationUrl">
+									<a href="{{ link('misc/location-info', '', {'location': $user.Profile.location}) }}" rel="nofollow noreferrer" target="_blank" class="u-concealed">{$user.Profile.location}</a>
+								<xf:else />
+									{$user.Profile.location}
+								</xf:if>
+							</dd>
+						</dl>
+				</xf:if>
+				<xf:if is="$user.Profile.website">
+						<dl class="pairs pairs--justified">
+							<dt>{{ phrase('website') }}</dt>
+							<dd><a href="{$user.Profile.website}" rel="nofollow" target="_blank">{$user.Profile.website|url('host', phrase('visit_site'))}</a></dd>
+						</dl>
+				</xf:if>
+			</div>
+		</div>
+	</div>
+	
+	<xf:if is="{$request.status_message} != ''">
+	<div class="block">
+	<div class="block-container">
+		<h3 class="block-header">{{ phrase('xp_vb_request_status_information') }}</h3>
+		<div class="block-body">
+			<div class="requestBody">
+				<article class="requestBody-main">
+					{{ bb_code($request.status_message, 'vb_request', $request) }}
+				</article>
+			</div>
+		</div>
+	</div>
+	</div>
+	</xf:if>
+</xf:sidebar>]]></template>
+  <template type="public" title="xp_vb_user_list_macros" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:macro name="request_user"
+	arg-request="!"
+	arg-user="!"
+	arg-extraInfo="">
+
+	<xf:css src="structured_list.less" />
+	<xf:css src="xp_vb.less" />
+
+	<div class="structItem structItem--item  js-requestListItem-{$request.request_id}" data-author="{{ $request.User.username ?: $request.username }}">
+		<div class="structItem-cell structItem-cell--icon structItem-cell--iconExpanded structItem-cell--userVbAvatarImage">
+			<div class="structItem-iconContainer">
+					<xf:avatar user="$request.User" size="l" defaultname="{{ $request.username ?: phrase('deleted_member') }}" />
+			</div>
+		</div>
+		<div class="structItem-cell structItem-cell--main structItem-cell--listViewLayout" data-xf-init="touch-proxy">
+			<xf:if contentcheck="true">
+				<ul class="structItem-statuses">
+				<xf:contentcheck>
+					<xf:if is="$request.request_status == 'pending'">
+						<li><span class="label label--smallest label--gray">{{ phrase('xp_vb_pending') }}</span></li>
+					</xf:if>
+					<xf:if is="$request.request_status == 'approved'">
+						<li><span class="label label--smallest label--green">{{ phrase('xp_vb_approved') }}</span></li>
+					</xf:if>
+					<xf:if is="$request.request_status == 'rejected'">
+						<li><span class="label label--smallest label--red">{{ phrase('xp_vb_rejected') }}</span></li>
+					</xf:if>
+					<xf:if is="$request.request_status == 'closed'">
+						<li><span class="label label--smallest label--gray">{{ phrase('xp_vb_closed') }}</span></li>
+					</xf:if>
+				</xf:contentcheck>
+				</ul>
+			</xf:if>
+
+			<div class="structItem-title">
+				<a href="{{ link('vb/requests', $request) }}" class="" data-tp-primary="on">{{ phrase('xp_vb_request_vb_for') }} '{$user.username}'</a>
+			</div>
+
+			<div class="structItem-itemTagLine">
+				{{ snippet($request.message, 300, {'stripQuote': true}) }}
+			</div>
+
+			<div class="structItem-listViewMeta">
+				<dl class="pairs pairs--justified structItem-minor structItem-metaItem structItem-metaItem--author">
+					<dt></dt>
+					<dd><xf:username user="$request.User" defaultname="{{ $request.username ?: phrase('deleted_member') }}" /></dd>
+				</dl>
+				<dl class="pairs pairs--justified structItem-minor structItem-metaItem structItem-metaItem--createdate">
+					<dt></dt>
+					<dd><a href="{{ link('vb/requests', $request) }}" rel="nofollow" class="u-concealed"><xf:date time="{$request.request_date}" /></a></dd>
+				</dl>
+				<xf:if is="$request.request_status == 'pending' AND $request.edit_date AND $request.edit_date > $request.request_date">
+					<dl class="pairs pairs--justified structItem-minor structItem-metaItem structItem-metaItem--lastUpdate">
+						<dt>{{ phrase('updated') }}</dt>
+						<dd><xf:date time="{$request.edit_date}" /></dd>
+					</dl>
+				</xf:if>
+				<xf:if is="$request.request_status == 'approved'">
+					<dl class="pairs pairs--justified structItem-minor structItem-metaItem structItem-metaItem--approvedDate">
+						<dt>{{ phrase('xp_vb_approved') }}</dt>
+						<dd><xf:date time="{$request.approve_date}" /></dd>
+					</dl>
+				</xf:if>
+				<xf:if is="$request.request_status == 'rejected'">
+					<dl class="pairs pairs--justified structItem-minor structItem-metaItem structItem-metaItem--rejectedDate">
+						<dt>{{ phrase('xp_vb_rejected') }}</dt>
+						<dd><xf:date time="{$request.reject_date}" /></dd>
+					</dl>
+				</xf:if>
+				<xf:if is="$request.request_status == 'closed'">
+					<dl class="pairs pairs--justified structItem-minor structItem-metaItem structItem-metaItem--closedDate">
+						<dt>{{ phrase('xp_vb_closed') }}</dt>
+						<dd><xf:date time="{$request.close_date}" /></dd>
+					</dl>
+				</xf:if>
+			</div>
+		</div>
+	</div>
+</xf:macro>]]></template>
+  <template type="public" title="xp_vb_user_request" version_id="2010370" version_string="2.1.3"><![CDATA[<xf:title>{{ phrase('xp_vb_request_vb') }} </xf:title>
+
+<xf:breadcrumb href="{{ link('members/request', $user) }}">{{ phrase('xp_vb_request_vb') }}</xf:breadcrumb>
+
+<xf:form action="{{ link('members/request', $user) }}" class="block" ajax="true" data-force-flash-message="on" 
+	data-preview-url="{{ link('members/request-preview', $request) }}">
+
+	<div class="block-container">
+		<div class="block-body">
+			<div data-xf-init="attachment-manager">
+				<xf:editorrow name="message" value="{$request.message}" data-min-height="150"
+					attachments="{$attachmentData.attachments}"
+					label="{{ phrase('xp_vb_request_information') }}"
+					hint=""
+					explain="{{ phrase('xp_vb_request_information_explain') }}" />
+
+				<xf:formrow>
+					<xf:if is="$attachmentData">
+						<xf:macro template="helper_attach_upload" name="upload_block" arg-attachmentData="{$attachmentData}" />
+					</xf:if>
+					
+				</xf:formrow>
+			</div>
+
+			<xf:checkboxrow label="">
+				<xf:option name="accept" required="required">{{ phrase('xp_vb_i_have_read_and_accept_your_terms_and_conditions') }}</xf:option>
+			</xf:checkboxrow>
+		</div>
+
+		<xf:submitrow icon="save" submit="{{ phrase('xp_vb_submit_request') }}">
+			
+		</xf:submitrow>
+	</div>
+</xf:form>]]></template>
+</templates>

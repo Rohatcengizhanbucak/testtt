@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<content_type_fields>
+  <field content_type="vb_request" field_name="alert_handler_class">XP\VB\Alert\Request</field>
+  <field content_type="vb_request" field_name="attachment_handler_class">XP\VB\Attachment\Request</field>
+  <field content_type="vb_request" field_name="entity">XP\VB:Request</field>
+</content_type_fields>

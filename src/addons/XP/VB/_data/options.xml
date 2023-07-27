@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<options>
+  <option option_id="XPVBmembersPerPage" edit_format="spinbox" data_type="positive_integer">
+    <default_value>20</default_value>
+    <edit_format_params>min=5</edit_format_params>
+    <relation group_id="xpVB" display_order="90"/>
+  </option>
+  <option option_id="xpCustomVbIcon" edit_format="textbox" data_type="string">
+    <default_value></default_value>
+    <relation group_id="xpVB" display_order="70"/>
+  </option>
+  <option option_id="xpCustomVbImage" edit_format="textbox" data_type="string">
+    <default_value></default_value>
+    <relation group_id="xpVB" display_order="80"/>
+  </option>
+  <option option_id="xpVB_location" edit_format="radio" data_type="string">
+    <default_value>right</default_value>
+    <edit_format_params>left=Left side of the username
+right=Right side of the username</edit_format_params>
+    <relation group_id="xpVB" display_order="10"/>
+  </option>
+  <option option_id="xpVbAllowedFileExtensions" edit_format="textbox" data_type="string">
+    <default_value>zip
+txt
+pdf
+png
+jpg
+jpeg
+jpe
+gif</default_value>
+    <edit_format_params>rows=6</edit_format_params>
+    <relation group_id="xpVB" display_order="40"/>
+  </option>
+  <option option_id="xpVbAttachmentMaxFileSize" edit_format="spinbox" data_type="unsigned_integer">
+    <default_value>2048</default_value>
+    <edit_format_params>min=0
+step=1
+units={{ phrase('units_kb') }}</edit_format_params>
+    <relation group_id="xpVB" display_order="20"/>
+  </option>
+  <option option_id="xpVbAttachmentMaxPerRequest" edit_format="spinbox" data_type="positive_integer">
+    <default_value>25</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <relation group_id="xpVB" display_order="30"/>
+  </option>
+  <option option_id="xpVbRequestsPerPage" edit_format="spinbox" data_type="positive_integer">
+    <default_value>20</default_value>
+    <edit_format_params>min=5</edit_format_params>
+    <relation group_id="xpVB" display_order="50"/>
+  </option>
+  <option option_id="xpVbType" edit_format="radio" data_type="string">
+    <default_value>default</default_value>
+    <edit_format_params>default=Default
+icon=Icon
+image=Image</edit_format_params>
+    <relation group_id="xpVB" display_order="60"/>
+  </option>
+</options>

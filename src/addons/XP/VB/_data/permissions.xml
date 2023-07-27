@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+  <permission permission_group_id="view" permission_id="XP_VB_Badge" permission_type="flag" interface_group_id="xp_vb_requests" display_order="450"/>
+  <permission permission_group_id="view" permission_id="XP_VB_List" permission_type="flag" interface_group_id="xp_vb_requests" display_order="500"/>
+  <permission permission_group_id="xp_vb" permission_id="editOwnRequest" permission_type="flag" interface_group_id="xp_vb_requests" display_order="400"/>
+  <permission permission_group_id="xp_vb" permission_id="manageAnyRequest" permission_type="flag" interface_group_id="xp_vb_moderator" display_order="100"/>
+  <permission permission_group_id="xp_vb" permission_id="maxRequestCount" permission_type="integer" interface_group_id="xp_vb_requests" display_order="200"/>
+  <permission permission_group_id="xp_vb" permission_id="request" permission_type="flag" interface_group_id="xp_vb_requests" display_order="100"/>
+  <permission permission_group_id="xp_vb" permission_id="uploadRequestAttach" permission_type="flag" interface_group_id="xp_vb_requests" display_order="200"/>
+  <permission permission_group_id="xp_vb" permission_id="viewOwnRequest" permission_type="flag" interface_group_id="xp_vb_requests" display_order="300"/>
+</permissions>

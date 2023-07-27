@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phrases>
+  <phrase title="XP_VB_verified_explain" version_id="2020070" version_string="2.2.0"><![CDATA[Verified badges help to identify members more easily, making it easy to find trusted users. <br /><br />
+
+Verified users show a checkmark next to their username in most places.]]></phrase>
+  <phrase title="XP_VB_verified_members" version_id="2010570" version_string="2.1.5"><![CDATA[Verified Members]]></phrase>
+  <phrase title="XP_VB_verified_viewing_list" version_id="2010570" version_string="2.1.5"><![CDATA[Viewing verified members]]></phrase>
+  <phrase title="nav.XP_VB_verified" version_id="2010570" version_string="2.1.5"><![CDATA[Verified members]]></phrase>
+  <phrase title="nav.xp_vbRequests" version_id="2000070" version_string="2.0.0"><![CDATA[Verification Badge Requests]]></phrase>
+  <phrase title="nav.xp_vbYourRequests" version_id="2000070" version_string="2.0.0"><![CDATA[Your Verification Badge Request]]></phrase>
+  <phrase title="option.XPVBmembersPerPage" version_id="2010570" version_string="2.1.5"><![CDATA[Verified Members To List Per Page]]></phrase>
+  <phrase title="option.xpCustomVbIcon" version_id="2010470" version_string="2.1.4"><![CDATA[Custom Badge - Icon]]></phrase>
+  <phrase title="option.xpCustomVbImage" version_id="2010470" version_string="2.1.4"><![CDATA[Custom Badge - Image]]></phrase>
+  <phrase title="option.xpVB_location" version_id="1000070" version_string="1.0.0"><![CDATA[Location of the Badge]]></phrase>
+  <phrase title="option.xpVbAllowedFileExtensions" version_id="2000070" version_string="2.0.0"><![CDATA[Allowed request attachment file extensions]]></phrase>
+  <phrase title="option.xpVbAttachmentMaxFileSize" version_id="2000070" version_string="2.0.0"><![CDATA[Maximum item attachment file size (KB)]]></phrase>
+  <phrase title="option.xpVbAttachmentMaxPerRequest" version_id="2000070" version_string="2.0.0"><![CDATA[Maximum attachments per request]]></phrase>
+  <phrase title="option.xpVbRequestsPerPage" version_id="2000070" version_string="2.0.0"><![CDATA[Requests Per Page]]></phrase>
+  <phrase title="option.xpVbType" version_id="2010470" version_string="2.1.4"><![CDATA[Verification Badge]]></phrase>
+  <phrase title="option_explain.XPVBmembersPerPage" version_id="2010570" version_string="2.1.5"><![CDATA[Limit the number of members to show on each page of the verified member list.]]></phrase>
+  <phrase title="option_explain.xpCustomVbIcon" version_id="2010470" version_string="2.1.4"><![CDATA[Enter the FontAwesome code for the icon. Example: fa-check-circle]]></phrase>
+  <phrase title="option_explain.xpCustomVbImage" version_id="2010470" version_string="2.1.4"><![CDATA[Enter the direct link to the image.]]></phrase>
+  <phrase title="option_explain.xpVB_location" version_id="1000070" version_string="1.0.0"><![CDATA[Where do you want to display the verification badge?]]></phrase>
+  <phrase title="option_explain.xpVbAllowedFileExtensions" version_id="2000070" version_string="2.0.0"><![CDATA[List the file extensions that are allowed to be uploaded to requests. Use spaces or line break between extensions.]]></phrase>
+  <phrase title="option_explain.xpVbAttachmentMaxFileSize" version_id="2000070" version_string="2.0.0"><![CDATA[Provide the maximum verification badge request attachment file size in kilobytes (KB). Attachments over this size will be rejected.]]></phrase>
+  <phrase title="option_explain.xpVbAttachmentMaxPerRequest" version_id="2000070" version_string="2.0.0"><![CDATA[Use 0 to allow an unlimited number of attachments per request. To disable request attachments, use the permissions system.]]></phrase>
+  <phrase title="option_explain.xpVbRequestsPerPage" version_id="2000070" version_string="2.0.0"><![CDATA[How many requests do you want to display per page?]]></phrase>
+  <phrase title="option_explain.xpVbType" version_id="2010470" version_string="2.1.4"><![CDATA[Select the type of badge you like for the verification badge. If you select Icon or Image, make sure to fill the related field for it.]]></phrase>
+  <phrase title="option_group.xpVB" version_id="2010570" version_string="2.1.5"><![CDATA[[OzzModz] Verification Badge]]></phrase>
+  <phrase title="option_group_description.xpVB" version_id="1000070" version_string="1.0.0"><![CDATA[Options to control Verification Badge add-on]]></phrase>
+  <phrase title="permission.view_XP_VB_Badge" version_id="2010570" version_string="2.1.5"><![CDATA[Can view verified members badge]]></phrase>
+  <phrase title="permission.view_XP_VB_List" version_id="2010570" version_string="2.1.5"><![CDATA[Can view verified members page]]></phrase>
+  <phrase title="permission.xp_vb_editOwnRequest" version_id="2000070" version_string="2.0.0"><![CDATA[Edit own Requests]]></phrase>
+  <phrase title="permission.xp_vb_manageAnyRequest" version_id="2000070" version_string="2.0.0"><![CDATA[Manage Verification Badge Requests]]></phrase>
+  <phrase title="permission.xp_vb_maxRequestCount" version_id="2000070" version_string="2.0.0"><![CDATA[Max Verification Badge Request per user]]></phrase>
+  <phrase title="permission.xp_vb_request" version_id="2000070" version_string="2.0.0"><![CDATA[Request Verification Badge]]></phrase>
+  <phrase title="permission.xp_vb_uploadRequestAttach" version_id="2000070" version_string="2.0.0"><![CDATA[Upload attachments to Verification Badge Request]]></phrase>
+  <phrase title="permission.xp_vb_viewOwnRequest" version_id="2000070" version_string="2.0.0"><![CDATA[View own Verification Badge Request]]></phrase>
+  <phrase title="permission_interface.xp_vb_moderator" version_id="2010570" version_string="2.1.5"><![CDATA[[OzzModz] Verification Badge Request Moderator Permissions]]></phrase>
+  <phrase title="permission_interface.xp_vb_requests" version_id="2010570" version_string="2.1.5"><![CDATA[[OzzModz] Verification Badge Request Permissions]]></phrase>
+  <phrase title="style_prop.xp_vb_badge" version_id="1000070" version_string="1.0.0"><![CDATA[Badge]]></phrase>
+  <phrase title="style_prop_desc.xp_vb_badge" version_id="1000070" version_string="1.0.0"><![CDATA[Style of the badge]]></phrase>
+  <phrase title="style_prop_group.xp_vb" version_id="2010570" version_string="2.1.5"><![CDATA[[OzzModz] Verification Badge]]></phrase>
+  <phrase title="style_prop_group_desc.xp_vb" version_id="2010570" version_string="2.1.5"><![CDATA[Style properties to customize the [OzzModz] Verification Badge]]></phrase>
+  <phrase title="xp_vb_added_by" version_id="2000070" version_string="2.0.0"><![CDATA[Added By]]></phrase>
+  <phrase title="xp_vb_approve_request" version_id="2000070" version_string="2.0.0"><![CDATA[Approve]]></phrase>
+  <phrase title="xp_vb_approve_request_by_x" version_id="2000070" version_string="2.0.0"><![CDATA[Approve Verification Badge Request by {name}]]></phrase>
+  <phrase title="xp_vb_approved" version_id="2000070" version_string="2.0.0"><![CDATA[Approved]]></phrase>
+  <phrase title="xp_vb_close_request" version_id="2000070" version_string="2.0.0"><![CDATA[Close]]></phrase>
+  <phrase title="xp_vb_close_request_by_x" version_id="2000070" version_string="2.0.0"><![CDATA[Close Verification Badge Request by {name}]]></phrase>
+  <phrase title="xp_vb_closed" version_id="2000070" version_string="2.0.0"><![CDATA[Closed]]></phrase>
+  <phrase title="xp_vb_confrim_approve_request" version_id="2000070" version_string="2.0.0"><![CDATA[I understand by approving this verification badge request, the user will be marked as verified and a verification badge will be displayed next to his/her username.]]></phrase>
+  <phrase title="xp_vb_date_approved" version_id="2000070" version_string="2.0.0"><![CDATA[Date Approved]]></phrase>
+  <phrase title="xp_vb_date_closed" version_id="2000070" version_string="2.0.0"><![CDATA[Date Closed]]></phrase>
+  <phrase title="xp_vb_date_rejected" version_id="2000070" version_string="2.0.0"><![CDATA[Date Rejected]]></phrase>
+  <phrase title="xp_vb_display_user_as_staff" version_id="1000070" version_string="1.0.0"><![CDATA[Display user as verified]]></phrase>
+  <phrase title="xp_vb_edit_request_by_x" version_id="2000070" version_string="2.0.0"><![CDATA[Edit Verification Badge Request by {name}]]></phrase>
+  <phrase title="xp_vb_i_have_read_and_accept_your_terms_and_conditions" version_id="2000070" version_string="2.0.0"><![CDATA[I have read and accepted the terms and conditions.]]></phrase>
+  <phrase title="xp_vb_if_selected_this_user_will_be_listed_publicly_as_verified_member" version_id="1000070" version_string="1.0.0"><![CDATA[If selected, this user will be listed publicly as a verified member.]]></phrase>
+  <phrase title="xp_vb_is_verified" version_id="1000070" version_string="1.0.0"><![CDATA[Is Verified]]></phrase>
+  <phrase title="xp_vb_no_requests_have_been_submitted_yet" version_id="2000070" version_string="2.0.0"><![CDATA[No request for verification badge is submitted yet.]]></phrase>
+  <phrase title="xp_vb_pending" version_id="2000070" version_string="2.0.0"><![CDATA[Pending]]></phrase>
+  <phrase title="xp_vb_reject_request" version_id="2000070" version_string="2.0.0"><![CDATA[Reject]]></phrase>
+  <phrase title="xp_vb_reject_request_by_x" version_id="2000070" version_string="2.0.0"><![CDATA[Reject Verification Badge Request by {name}]]></phrase>
+  <phrase title="xp_vb_rejected" version_id="2000070" version_string="2.0.0"><![CDATA[Rejected]]></phrase>
+  <phrase title="xp_vb_request_date" version_id="2000070" version_string="2.0.0"><![CDATA[Request Date]]></phrase>
+  <phrase title="xp_vb_request_for_x" version_id="2000070" version_string="2.0.0"><![CDATA[Verification Badge Request for '{name}']]></phrase>
+  <phrase title="xp_vb_request_information" version_id="2000070" version_string="2.0.0"><![CDATA[Verification Badge Request Information]]></phrase>
+  <phrase title="xp_vb_request_information_explain" version_id="2000070" version_string="2.0.0"><![CDATA[<b>IMPORTANT</b>: Please upload as much identification documents as possible to speed up the process of verifying the account. Also if any of the documents needs explanations, please use the editor above to describe them.]]></phrase>
+  <phrase title="xp_vb_request_status" version_id="2000070" version_string="2.0.0"><![CDATA[Request Status]]></phrase>
+  <phrase title="xp_vb_request_status_information" version_id="2000070" version_string="2.0.0"><![CDATA[Status Information]]></phrase>
+  <phrase title="xp_vb_request_status_information_approve_explain" version_id="2000070" version_string="2.0.0"><![CDATA[Add information pertaining to the decision to approve this verification badge request.]]></phrase>
+  <phrase title="xp_vb_request_status_information_close_explain" version_id="2000070" version_string="2.0.0"><![CDATA[Add the reason for closing this verification badge request.]]></phrase>
+  <phrase title="xp_vb_request_status_information_explain" version_id="2000070" version_string="2.0.0"><![CDATA[Explain what is the status of this request. If you require the user to provide more information or if you are checking the uploaded documents, you can explain here.]]></phrase>
+  <phrase title="xp_vb_request_status_information_reject_explain" version_id="2000070" version_string="2.0.0"><![CDATA[Add the reason for rejecting this verification badge request.]]></phrase>
+  <phrase title="xp_vb_request_submitted_by" version_id="2000070" version_string="2.0.0"><![CDATA[Request Submitted By]]></phrase>
+  <phrase title="xp_vb_request_vb" version_id="2000070" version_string="2.0.0"><![CDATA[Request Verification Badge]]></phrase>
+  <phrase title="xp_vb_request_vb_for" version_id="2000070" version_string="2.0.0"><![CDATA[Request Verification Badge for]]></phrase>
+  <phrase title="xp_vb_requested_request_not_found" version_id="2000070" version_string="2.0.0"><![CDATA[The requested verification badge request not found.]]></phrase>
+  <phrase title="xp_vb_requests" version_id="2000070" version_string="2.0.0"><![CDATA[Verification Badge Requests]]></phrase>
+  <phrase title="xp_vb_requestscount" version_id="2000070" version_string="2.0.0"><![CDATA[Verification Badge Requests Count]]></phrase>
+  <phrase title="xp_vb_requestyourbadge" version_id="2000070" version_string="2.0.0"><![CDATA[Request Verification Badge]]></phrase>
+  <phrase title="xp_vb_submit_request" version_id="2000070" version_string="2.0.0"><![CDATA[Submit Request]]></phrase>
+  <phrase title="xp_vb_there_no_requests_matching_your_filters" version_id="2000070" version_string="2.0.0"><![CDATA[There are no requests matching your filters.]]></phrase>
+  <phrase title="xp_vb_tooltip" version_id="1000070" version_string="1.0.0"><![CDATA[A verification badge confirms that this is an authentic Page/Profile for this business, organization or person.]]></phrase>
+  <phrase title="xp_vb_user" version_id="2000070" version_string="2.0.0"><![CDATA[User]]></phrase>
+  <phrase title="xp_vb_user_has_requested_vb_at_least_x_times" version_id="2000070" version_string="2.0.0"><![CDATA[User has requested Verification Badge at least X times]]></phrase>
+  <phrase title="xp_vb_user_has_requested_vb_no_more_than_x_times" version_id="2000070" version_string="2.0.0"><![CDATA[User has requested Verification Badge no more than X times]]></phrase>
+  <phrase title="xp_vb_view_x_requests" version_id="2000070" version_string="2.0.0"><![CDATA[View {name}'s Verification Badge requests]]></phrase>
+  <phrase title="xp_vb_your_request_has_been_automatically_closed" version_id="2000070" version_string="2.0.0"><![CDATA[One of your requests for verification badge has been approved. As a result, you gained the badge, and all your other pending requests have been closed.]]></phrase>
+  <phrase title="xp_vb_your_request_to_get_vb_has_been_approved" version_id="2000070" version_string="2.0.0"><![CDATA[Your request to get verification badge has been approved.]]></phrase>
+  <phrase title="xp_vb_your_request_to_get_vb_has_been_closed" version_id="2000070" version_string="2.0.0"><![CDATA[Your request to get verification badge has been closed.]]></phrase>
+  <phrase title="xp_vb_your_request_to_get_vb_has_been_rejected" version_id="2000070" version_string="2.0.0"><![CDATA[Your request to get verification badge has been rejected.]]></phrase>
+</phrases>
